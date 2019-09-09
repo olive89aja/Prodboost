@@ -7,7 +7,7 @@ function listUpcomingEvents() {
     timeMin: (new Date()).toISOString(),
     showDeleted: false,
     singleEvents: true,
-    maxResults: 5,
+    maxResults: 20,
     orderBy: 'startTime'
   };
   var response = Calendar.Events.list(calendarId, optionalArgs);
