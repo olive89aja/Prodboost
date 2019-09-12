@@ -14,26 +14,27 @@ function drawRect () {
 }
 
 const projects = [];
-function makeProject (projectName) {
-    const project = {
-        name: projectName,
-        tasks: [],
-        addTask(taskName) {
-            const task = {
-                dependents: [],
-                name: taskName,
-                addDependent(child) {
-                    this.dependents.push(child);
-                }
+function Graph () {
+    this.AdjList = new Map();
+    this.addVertex = function (v) {
+        this.AdjList.set(v,[]);
+    }
+    this.addEdge = function (v,w) {
+        this.AdjList.get(v).push(w);
+    }
+    this.printGraph = function () {
+        let get_vertices = this.AdjList.keys();
+        for ( let vertex of get_vertices) {
+            let values = this.AdjList.get(vertex);
+            let adjacencies = "";
+            for(let edge of values) {
+                adjacencies += `${edge}`;
             }
-            this.tasks.push(task);
-        },
-        render() {
-
+            console.log(`${vertex} -> ${adjacencies}`);
         }
     }
-    projects.push(project);
 }
+
 
 $(document).ready(() => {
     $("#box").on("click", (event) => {
@@ -47,9 +48,4 @@ $(document).ready(() => {
             canvas.add(img);
         });
     });
-    makeProject("blah");
-    projects[0].addTask("woo");
-    projects[0].addTask("wah");
-    projects[0].tasks[0].addDependent(projects[0].tasks[1]);
-    console.log(projects);
 });
