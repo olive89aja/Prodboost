@@ -5,26 +5,139 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"/>
+      <link rel="stylesheet" href="style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.7.3/fabric.js'></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
   </head>
   <body>
-    <form id="daily-input">
-      <div id="submit-button"></div>
-    </form>
-    <table id="dataTable">
-      <tr id="column-labels">
-        <th>Task</th>
-      </tr>
-    </table>
-
-    <div id="burndown"></div>
+      <div class="jumbotron">
+          <h1 class="PageName">Boost your productivity</h1>
+          <p class="lead">All the tools you need</p>
+      </div>
+      
+      <div class="col-md-6 offset-3">
+      <ul class="list-group">
+          <li class="list-group-item active">Task1</li>
+          <li class="list-group-item">Task2</li>
+          <li class="list-group-item">Task3</li>
+          <li class="list-group-item">Task4</li>
+          <li class="list-group-item">Task5</li>
+        </ul>
+      </div>
+    
+      <div class="d-flex justify-content-center" >
+      <div class="card" style="width: 18rem;">
+              <img class="card-img-top" src="https://i.ibb.co/n0pH2QC/prodboost3.jpg" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Burned down chart</h5>
+                <p class="card-text">Measures of productivity</p>
+              </div>
+            </div>
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="https://i.ibb.co/3zQw2rv/prodboost4.jpg" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Calendar</h5>
+                  <p class="card-text">Make the most of your time</p>
+                </div>
+              </div>
+              <div class="card" style="width: 18rem;">
+                  <img class="card-img-top" src="https://i.ibb.co/vCWhccX/prodboost5.jpg" alt="Card image cap">
+                  <div class="card-body">
+                    <h5 class="card-title">Tools</h5>
+                    <p class="card-text">Google Docs</p>
+                  </div>
+                </div>
+      </div>
+      <div id = "container" class="hidden">
+        <form id="Idealtask-input" >
+          <div class="form-group">
+            <label for="total-duration">Total Duration of Task (days)</label>
+            <input
+              type="number"
+              class="form-control"
+              id="total-duration"
+              placeholder="total days"
+            />
+          </div>
+          <div class="form-group">
+            <label for="ideal-hours">Ideal hours per day</label>
+            <input
+              type="number"
+              class="form-control"
+              id="ideal-hours"
+              placeholder="hours per day"
+            />
+          </div>
+          <button id="model-data" type="submit" class="btn btn-primary">
+            Model Data
+          </button>
+          <form id="Actualtask-input">
+            <div class="form-group">
+              <label for="day1-input">day 1 hours:</label>
+              <input
+                type="number"
+                class="form-control"
+                id="day1-input"
+                placeholder="# of hrs today"
+              />
+            </div>
+            <div class="form-group">
+              <label for="day2-input">day 2 hours:</label>
+              <input
+                type="number"
+                class="form-control"
+                id="day2-input"
+                placeholder="# of hrs today"
+              />
+            </div>
+            <div class="form-group">
+              <label for="day3-input">day 3 hours:</label>
+              <input
+                type="number"
+                class="form-control"
+                id="day3-input"
+                placeholder="# of hrs today"
+              />
+            </div>
+            <div class="form-group">
+              <label for="day4-input">day 4 hours:</label>
+              <input
+                type="number"
+                class="form-control"
+                id="day4-input"
+                placeholder="# of hrs today"
+              />
+            </div>
+            <div class="form-group">
+              <label for="day5-input">day 5 hours:</label>
+              <input
+                type="number"
+                class="form-control"
+                id="day5-input"
+                placeholder="# of hrs today"
+              />
+            </div>
+            <button id="progress-data" type="submit" class="btn btn-primary">
+              See Progress
+            </button>
+          </form>
+        </form>
+        <div id="function"></div>
+        <canvas id="initial-chart" width="200" height="200" ></canvas>
+        <canvas id="progress-chart" width="200" height="200" ></canvas>
+      </div>
 
     <canvas id="c" width = "800" height = "600"></canvas>
     <script src="script.js"></script>
     <button id = "box">Box</button>
     <button id = "arrow">Arrow</button>
-    <script src="assets/api_tests.js"></script>
+    <script src="assets/script.js"></script>
+    <script src = "assets/burndown_test.js"></script>
   </body>
 </html>
