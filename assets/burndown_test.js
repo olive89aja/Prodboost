@@ -51,6 +51,7 @@ $(document).ready(function() {
         }
       }
     });
+    $("#function").text(`y = 40 - ${idealHours}x`);
   });
   $("#progress-data").on("click", function(event) {
     event.preventDefault();
@@ -67,6 +68,7 @@ $(document).ready(function() {
     adjustedRate = burndown / daysLeft;
     //forecastBurndown = burndown - adjustedRate;
     actualHoursArray = [totalHours, 34, 25.5, 17, 8.5, 0];
+    $("#function").text(`y = 40 - ${adjustedRate}x (adjusted rate)`);
     console.log(actualHoursArray);
 
     let ctxActual = $("#progress-chart");
