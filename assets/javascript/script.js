@@ -41,7 +41,7 @@ $(document).ready(() => {
     })
     $("#arrow").on("click", () => {
         arrowMode = true;
-        fabric.Image.fromURL("arrow.png", (img) => {
+        fabric.Image.fromURL("assets/javascript/arrow.png", (img) => {
             img.scaleToHeight(100);
             img.scaleToWidth(100);
             canvas.add(img);
