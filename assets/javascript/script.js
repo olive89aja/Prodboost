@@ -64,6 +64,25 @@ function Project (name) {
             }
         }  
     }
+
+    this.findActiveTasks = function() {
+        const visited = [];
+        for(const [key,values] of this.AdjList) {
+            for(const value of values) {
+                if(!visited.includes(value)) {
+                    visited.push(value);
+                }
+            }
+        }
+        const unvisited = [];
+        for(const [key,values] of this.AdjList) {
+            if(!visited.includes(key)) {
+                unvisited.push(key);
+            }
+        }
+        return unvisited;
+    }
+
     //Uses fabric to render a representation of the graph to the canvas
     this.render = function() {
         canvas.clear();
@@ -101,32 +120,57 @@ function Project (name) {
             }
             index++
         }
+        $("#active-tasks").empty();
+        for(const task of this.findActiveTasks()) {
+            const taskHolder = $("<li class=list-group-item>");
+            taskHolder.text(task.name);
+            const genBurndown = $("<button class = burndownBtn>");
+            genBurndown.attr("data",task.name)
+            genBurndown.text("Show burndown");
+            taskHolder.append(genBurndown);
+            $("#active-tasks").append(taskHolder);
+        }
     }
 }
 
-function Task (name, description, timeExpected) {
+function Task (name, description, timeExpected, deadline) {
     this.name = name;
     this.description = description;
     this.timeExpected = timeExpected;
+    this.deadline = deadline;
     this.timesLogged = [];
+    this.completed = false;
     this.logTime = function(time) {
         this.timesLogged.push(time);
     }
+    this.markCompete = function() {
+        this.completed = true;
+    }
+    this.generateBurndown = function() {
+        
+    }
 }
 
+function makeBurndown () {
+    for(const task of project.AdjList.keys()) {
+        if(task.name === $(this).attr("data")) {
+            task.generateBurndown();
+        }
+    }
+}
+const project = new Project("1");
 $(document).ready(() => {
-    const project = new Project("1");
     $("#box").on("click", () => {
         $("#taskInput").removeClass("hidden");
     });
     $("#taskSubmit").on("click", (event) => {
         event.preventDefault();
-        const task = new Task($("#taskName").val(), $("#description").val(), $("#timeExpected").val());
+        const task = new Task($("#taskName").val(), $("#description").val(), $("#timeExpected").val(), $("#deadline").val());
         project.addVertex(task);
         $("#taskName").val("");
         $("#description").val("");
-        $("#timeExpected").val("")
-        project.printGraph();
+        $("#timeExpected").val("");
+        $("#deadline").val("");
         project.render();
         $("#taskInput").addClass("hidden");
     })
@@ -164,8 +208,9 @@ $(document).ready(() => {
         if(first && second) {
             project.addEdge(first,second);
         }
-        project.printGraph();
         project.render();
         $("#flowInput").addClass("hidden");
     })
+
+    $(document).on("click",".burndownBtn",makeBurndown);
 });
