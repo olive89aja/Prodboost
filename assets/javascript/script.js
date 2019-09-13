@@ -64,6 +64,25 @@ function Project (name) {
             }
         }  
     }
+
+    this.findActiveTasks = function() {
+        const visited = [];
+        for(const [key,values] of this.AdjList) {
+            for(const value of values) {
+                if(!visited.includes(value)) {
+                    visited.push(value);
+                }
+            }
+        }
+        const unvisited = [];
+        for(const [key,values] of this.AdjList) {
+            if(!visited.includes(key)) {
+                unvisited.push(key);
+            }
+        }
+        return unvisited;
+    }
+
     //Uses fabric to render a representation of the graph to the canvas
     this.render = function() {
         canvas.clear();
