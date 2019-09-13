@@ -133,7 +133,7 @@ function Project (name) {
     }
 }
 
-function Task (name, description, timeExpected) {
+function Task (name, description, timeExpected, deadline) {
     this.name = name;
     this.description = description;
     this.timeExpected = timeExpected;
@@ -145,9 +145,9 @@ function Task (name, description, timeExpected) {
     }
     this.markCompete = function() {
         this.completed = true;
-}
+    }
     this.generateBurndown = function() {
-
+        
     }
 }
 
