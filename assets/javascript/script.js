@@ -1,6 +1,5 @@
 var canvas = new fabric.Canvas('c');
 canvas.setBackgroundColor("white",canvas.renderAll.bind(canvas));
-let arrowMode = false;
 
 function drawRect () {
     var rect = new fabric.Rect({
@@ -13,43 +12,89 @@ function drawRect () {
     canvas.add(rect);
 }
 
-const projects = [];
-function makeProject (projectName) {
-    const project = {
-        name: projectName,
-        tasks: [],
-        addTask(taskName) {
-            const task = {
-                dependents: [],
-                name: taskName,
-                addDependent(child) {
-                    this.dependents.push(child);
-                }
+//Constructor for project objects. Projects are modeled as directed graphs of task objects.
+//This is done by instantiating a map, in which keys are tasks and values are arrays of adjacent tasks.
+function Project (name) {
+    this.name = name;
+    this.AdjList = new Map();
+    this.addVertex = function (v) {
+        this.AdjList.set(v,[]);
+    }
+    this.addEdge = function (v,w) {
+        this.AdjList.get(v).push(w);
+    }
+    this.printGraph = function () {
+        let get_vertices = this.AdjList.keys();
+        for ( let vertex of get_vertices) {
+            let values = this.AdjList.get(vertex);
+            let adjacencies = "";
+            for(let edge of values) {
+                adjacencies += `${edge}`;
             }
-            this.tasks.push(task);
-        },
-        render() {
-
+            console.log(`${vertex} -> ${adjacencies}`);
         }
     }
-    projects.push(project);
+    //Renders a representation of the graph to the canvas
+    this.render = function() {
+        
+    }
+}
+
+function Task (name, description, timeExpected) {
+    this.name = name;
+    this.description = description;
+    this.timeExpected = timeExpected;
+    this.timesLogged = [];
+    this.logTime = function(time) {
+        this.timesLogged.push(time);
+    }
 }
 
 $(document).ready(() => {
-    $("#box").on("click", (event) => {
-        drawRect();
+    const project = new Project("1");
+    $("#box").on("click", () => {
+        $("#taskInput").removeClass("hidden");
+    });
+    $("#taskSubmit").on("click", (event) => {
+        event.preventDefault();
+        const task = new Task($("#taskName").val(), $("#description").val(), $("#timeExpected").val());
+        project.addVertex(task);
+        $("#taskName").val("");
+        $("#description").val("");
+        $("#timeExpected").val("")
+        $("#taskInput").addClass("hidden");
     })
     $("#arrow").on("click", () => {
-        arrowMode = true;
-        fabric.Image.fromURL("assets/javascript/arrow.png", (img) => {
-            img.scaleToHeight(100);
-            img.scaleToWidth(100);
-            canvas.add(img);
-        });
+        $("#firstTaskHolder").empty();
+        $("#secondTaskHolder").empty();
+        for(const [key, value] of project.AdjList) {
+            const option = $("<option>");
+            option.val(key.name);
+            option.text(key.name);
+            $("#firstTaskHolder").append(option);
+        }
+        for(const [key, value] of project.AdjList) {
+            const option = $("<option>");
+            option.val(key.name);
+            option.text(key.name);
+            $("#secondTaskHolder").append(option);
+        }
+        $("#flowInput").removeClass("hidden");
     });
-    makeProject("blah");
-    projects[0].addTask("woo");
-    projects[0].addTask("wah");
-    projects[0].tasks[0].addDependent(projects[0].tasks[1]);
-    console.log(projects);
+
+    $("#flowSubmit").on("click", (event) => {
+        event.preventDefault();
+        let first;
+        let second;
+        for(const [key,value] of project.AdjList) {
+            if($("#firstTaskHolder").children().filter(":selected").val() === key.name) {
+                first = key;
+            }
+            if($("#secondTaskHolder").children().filter(":selected").val() === key.name) {
+                second = key;
+            }
+        }
+        project.addEdge(first,second);
+        $("#flowInput").addClass("hidden");
+    })
 });
