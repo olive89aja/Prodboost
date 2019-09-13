@@ -1,20 +1,35 @@
 var canvas = new fabric.Canvas('c');
 canvas.setBackgroundColor("white",canvas.renderAll.bind(canvas));
 
-//TODO: head of arrow is currently a circle. I couldn't figure out how to get a triangle in the correct orientation.
+//Had to do some math for this one
 function makeArrow(coords) {
     const line = new fabric.Line(coords, {
       fill: 'black',
       stroke: 'black',
       strokeWidth: 5,
     });
-    const circle = new fabric.Circle({
+    //The following draws the head of the arrow in the appropriate position and orientation
+    const x1=coords[0];
+    const y1=coords[1];
+    const x2=coords[2];
+    const y2=coords[3];
+    const x3=(x1-x2)/10;
+    const y3 = (y1-y2)/10;
+    const x4 = x3*Math.cos(Math.PI/4)-y3*Math.sin(Math.PI/4);
+    const y4= x3*Math.sin(Math.PI/4)+y3*Math.cos(Math.PI/4);
+    const x5 = x3*Math.cos(7*Math.PI/4)-y3*Math.sin(7*Math.PI/4);
+    const y5= x3*Math.sin(7*Math.PI/4)+y3*Math.cos(7*Math.PI/4);
+    const line2 = new fabric.Line([x2,y2,x4+x2,y4+y2],{
         fill: "black",
-        radius: 10,
-        left: coords[2]-10,
-        top: coords[3]-10,
-    })
-    const group = new fabric.Group([line,circle]);
+        stroke:"black",
+        strokeWidth: 5,
+    });
+    const line3 = new fabric.Line([x2,y2,x5+x2,y5+y2],{
+        fill: "black",
+        stroke:"black",
+        strokeWidth: 5,
+    });
+    const group = new fabric.Group([line,line2,line3]);
     canvas.add(group);
   }
 
