@@ -54,7 +54,7 @@
                   </div>
                 </div>
       </div>
-      <div id = "container">
+      <div id = "container" class = "hidden">
         <form id="Idealtask-input" >
           <div class="form-group">
             <label for="total-duration">Total Duration of Task (days)</label>
@@ -134,8 +134,34 @@
       </div>
 
     <canvas id="c" width = "800" height = "600"></canvas>
-    <button id = "box">Box</button>
-    <button id = "arrow">Arrow</button>
+    <button id = "box">Add task</button>
+    <form id="taskInput" class = "hidden">
+      <div class="form-group">
+        <label for="taskName">Task name</label>
+        <input id="taskName" type="text">
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="timeExpected">Time expected (hours)</label>
+        <input type="number" id="timeExpected">
+      </div>
+      <input type="submit" id="taskSubmit">
+    </form>
+    <button id = "arrow">Add flow between tasks</button>
+    <form id="flowInput" class = "hidden">
+      <div class="form-group">
+        <label for="firstTask">First task</label>
+        <select id="firstTaskHolder"></select>
+      </div>
+      <div class="form-group">
+        <label for="secondTask">Second task</label>
+        <select id="secondTaskHolder"></select>
+      </div>
+      <input type="submit" id="flowSubmit">
+    </form>
     <script src="assets/javascript/script.js"></script>
     <script src = "assets/javascript/burndown_test.js"></script>
   </body>
