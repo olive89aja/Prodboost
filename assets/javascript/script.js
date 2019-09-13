@@ -120,6 +120,16 @@ function Project (name) {
             }
             index++
         }
+        $("#active-tasks").empty();
+        for(const task of this.findActiveTasks()) {
+            const taskHolder = $("<li class=list-group-item>");
+            taskHolder.text(task.name);
+            const genBurndown = $("<button class = burndownBtn>");
+            genBurndown.attr("data",task.name)
+            genBurndown.text("Show burndown");
+            taskHolder.append(genBurndown);
+            $("#active-tasks").append(taskHolder);
+        }
     }
 }
 
