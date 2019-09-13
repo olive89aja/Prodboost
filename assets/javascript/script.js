@@ -137,25 +137,40 @@ function Task (name, description, timeExpected) {
     this.name = name;
     this.description = description;
     this.timeExpected = timeExpected;
+    this.deadline = deadline;
     this.timesLogged = [];
+    this.completed = false;
     this.logTime = function(time) {
         this.timesLogged.push(time);
     }
+    this.markCompete = function() {
+        this.completed = true;
+}
+    this.generateBurndown = function() {
+
+    }
 }
 
+function makeBurndown () {
+    for(const task of project.AdjList.keys()) {
+        if(task.name === $(this).attr("data")) {
+            task.generateBurndown();
+        }
+    }
+}
+const project = new Project("1");
 $(document).ready(() => {
-    const project = new Project("1");
     $("#box").on("click", () => {
         $("#taskInput").removeClass("hidden");
     });
     $("#taskSubmit").on("click", (event) => {
         event.preventDefault();
-        const task = new Task($("#taskName").val(), $("#description").val(), $("#timeExpected").val());
+        const task = new Task($("#taskName").val(), $("#description").val(), $("#timeExpected").val(), $("#deadline").val());
         project.addVertex(task);
         $("#taskName").val("");
         $("#description").val("");
-        $("#timeExpected").val("")
-        project.printGraph();
+        $("#timeExpected").val("");
+        $("#deadline").val("");
         project.render();
         $("#taskInput").addClass("hidden");
     })
@@ -193,8 +208,9 @@ $(document).ready(() => {
         if(first && second) {
             project.addEdge(first,second);
         }
-        project.printGraph();
         project.render();
         $("#flowInput").addClass("hidden");
     })
+
+    $(document).on("click",".burndownBtn",makeBurndown);
 });
