@@ -159,7 +159,7 @@ function Task (name, description, timeExpected, deadline) {
 }
 
 function makeBurndown () {
-    for(const task of project.AdjList.keys()) {
+    for(const task of projectList[currentProject].AdjList.keys()) {
         if(task.name === $(this).attr("data")) {
             task.generateBurndown();
         }
@@ -207,7 +207,7 @@ $(document).ready(() => {
             option.text(key.name);
             $("#firstTaskHolder").append(option);
         }
-        for(const [key, value] of project.AdjList) {
+        for(const [key, value] of projectList[currentProject].AdjList) {
             const option = $("<option>");
             option.val(key.name);
             option.text(key.name);
@@ -239,11 +239,11 @@ $(document).ready(() => {
     $("#addProject").on("click", () => {
         const newProject = new Project;
         projectList.push(newProject);
-        currentIndex = projectList.length-1;
+        currentProject = projectList.length-1;
         for(const child of $(".projectButton")) {
             child.value = "unselected";
         }
-        projectList[currentIndex].render();
+        projectList[currentProject].render();
     });
     $("#submitRename").on("click", () => {
         if(projectList.length>0){
