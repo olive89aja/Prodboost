@@ -4,6 +4,10 @@
     object-fit: cover;
 }
 
+input[type=number] {
+    width:20%;
+}
+
 
 .projectButton:hover {
     color:purple;
@@ -16,3 +20,4 @@
 .projectButton:focus {   
     background-color: orange;
 }
+
