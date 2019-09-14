@@ -7,3 +7,7 @@
     height: 15vw;
     object-fit: cover;
 }
+
+.projectButton[value="selected"] {
+    background-color: orange;
+}
