@@ -17,7 +17,7 @@ input[type=number] {
     color:blue;
 }
 
-.projectButton:focus {   
+.projectButton[value="selected"] {   
     background-color: orange;
 }
 
