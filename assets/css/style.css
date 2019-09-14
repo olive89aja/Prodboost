@@ -1,3 +1,4 @@
+<<<<<<< HEAD:style.css
 .card-img-top {
     width: 100%;
     height: 15vw;
@@ -15,4 +16,14 @@
 
 .projectbutton:focus {   
     background-color: orange;
+=======
+.hidden {
+    display: none;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+>>>>>>> 13c039d8b39a33e81f93db436d832d9729e4cadf:assets/css/style.css
 }

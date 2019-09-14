@@ -10,7 +10,7 @@
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"/>
-      <link rel="stylesheet" href="style.css">
+      <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.7.3/fabric.js'></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
@@ -39,12 +39,10 @@
       </div>
       
       <div class="col-md-6 offset-3">
-      <ul class="list-group">
-          <li class="list-group-item active">Review Business Plan</li>
-          <li class="list-group-item">Modelize financial data</li>
-          <li class="list-group-item">Identify trends</li>
-          <li class="list-group-item">Recommend actions to management</li>
-        </ul>
+      <p>Active Tasks</p>
+      <ul class="list-group" id="active-tasks">
+          
+      </ul>
       </div>
     
       <div class="d-flex justify-content-center" >
@@ -70,7 +68,7 @@
                   </div>
                 </div>
       </div>
-      <div id = "container" class="hidden">
+      <div id = "container" class = "hidden">
         <form id="Idealtask-input" >
           <div class="form-group">
             <label for="total-duration">Total Duration of Task (days)</label>
@@ -148,13 +146,47 @@
         <canvas id="initial-chart" width="200" height="200" ></canvas>
         <canvas id="progress-chart" width="200" height="200" ></canvas>
       </div>
-
+    <ul id="projectsList">
+      <button id="addProject">Add New Project</button>
+      <label for="rename">Rename this project</label>
+      <input type = "text" id = "rename">
+      <input type="submit" id = "submitRename">
+    </ul>
     <canvas id="c" width = "800" height = "600"></canvas>
-    <script src="script.js"></script>
-    <button id = "box">Box</button>
-    <button id = "arrow">Arrow</button>
-    <script src="assets/script.js"></script>
-    <script src = "assets/burndown_test.js"></script>
+    <button id = "box">Add task</button>
+    <form id="taskInput" class = "hidden">
+      <div class="form-group">
+        <label for="taskName">Task name</label>
+        <input id="taskName" type="text">
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <textarea id="description"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="timeExpected">Time expected (hours)</label>
+        <input type="number" id="timeExpected">
+      </div>
+      <div class="form-group">
+        <label for="deadline">Deadline</label>
+        <input type="date" id="deadline">
+      </div>
+      <input type="submit" id="taskSubmit">
+    </form>
+    <button id = "arrow">Add flow between tasks</button>
+    <form id="flowInput" class = "hidden">
+      <div class="form-group">
+        <label for="firstTask">First task</label>
+        <select id="firstTaskHolder"></select>
+      </div>
+      <div class="form-group">
+        <label for="secondTask">Second task</label>
+        <select id="secondTaskHolder"></select>
+      </div>
+      <input type="submit" id="flowSubmit">
+    </form>
+    <script src="assets/javascript/script.js"></script>
+    <script src = "assets/javascript/burndown_test.js"></script>
     <footer>
         <div class="container ">
             Copyright &copy;
