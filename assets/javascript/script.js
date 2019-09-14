@@ -150,6 +150,7 @@ function Task (name, description, timeExpected, deadline) {
     this.name = name;
     this.description = description;
     this.timeExpected = timeExpected;
+    this.actualTimes = [];
     this.deadline = deadline;
     this.completed = false;
     this.logTime = function(time) {
@@ -160,7 +161,7 @@ function Task (name, description, timeExpected, deadline) {
         this.completed = true;
     }
     this.generateBurndown = function() {
-        
+        //TODO: generate burndown for this task
     }
 }
 
