@@ -6,8 +6,17 @@
 
 input[type=number] {
     width:20%;
+    background-color:yellow;
 }
 
+input[type=text] {
+    width:20%;
+    background-color:yellow;
+}
+
+#description {
+    background-color:purple;
+}
 
 .projectButton:hover {
     color:purple;
