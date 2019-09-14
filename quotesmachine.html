@@ -27,7 +27,7 @@
 
     function productivityQuote() {
         $.ajax({
-            url: "https://quotes.rest/quote/search?category=inspire"+"&api_key=UH_ApJm41A3LUK_j_ScgCweF",
+            url: "http://quotes.rest/quote/random.json?"+"&api_key=UH_ApJm41A3LUK_j_ScgCweF",
             method:"GET"}).then(function(response){
                 var results = response.data;
                 console.log(response);
