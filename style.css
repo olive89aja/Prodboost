@@ -3,3 +3,16 @@
     height: 15vw;
     object-fit: cover;
 }
+
+
+.projectbutton:hover {
+    color:purple;
+}
+
+.projectbutton:active {
+    color:blue;
+}
+
+.projectbutton:focus {   
+    background-color: orange;
+}
