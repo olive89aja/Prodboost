@@ -35,8 +35,8 @@ function makeArrow(coords) {
 
 //Constructor for project objects. Projects are modeled as directed graphs of task objects.
 //This is done by instantiating a map, in which keys are tasks and values are arrays of adjacent tasks.
-function Project (name) {
-    this.name = name;
+function Project () {
+    this.name = "Untitled";
     this.AdjList = new Map();
     this.addVertex = function (v) {
         this.AdjList.set(v,[]);
@@ -89,6 +89,13 @@ function Project (name) {
         let index = 0;
         const keyIndices = [];
         const theta = 2*Math.PI/this.AdjList.size;
+        if($("#projectsList").children().filter("[data = "+projectList.indexOf(this)+"]").length === 0) {
+            const button = $("<button class = projectButton id ="+this.name+">");
+            button.val("selected")
+            button.attr("data",projectList.indexOf(this));
+            button.text(this.name);
+            $("#projectsList").append(button);
+        }
         for(const task of this.AdjList.keys()){           
             const rect = new fabric.Rect({
                 fill: 'green',
@@ -158,20 +165,35 @@ function makeBurndown () {
         }
     }
 }
-const project = new Project("1");
+
+function setProjectIndex () {
+    currentProject = $(this).attr("data");
+    for(const child of $(".projectButton")) {
+        child.value = "unselected";
+    }
+    $(this).val("selected");
+    projectList[currentProject].render();
+}
+
+const projectList = [];
+let currentProject = 0;
+
 $(document).ready(() => {
+    for(i = 0; i < projectList.length; i++) {
+        projectList[i].render();
+    }
     $("#box").on("click", () => {
         $("#taskInput").removeClass("hidden");
     });
     $("#taskSubmit").on("click", (event) => {
         event.preventDefault();
         const task = new Task($("#taskName").val(), $("#description").val(), $("#timeExpected").val(), $("#deadline").val());
-        project.addVertex(task);
+        projectList[currentProject].addVertex(task);
         $("#taskName").val("");
         $("#description").val("");
         $("#timeExpected").val("");
         $("#deadline").val("");
-        project.render();
+        projectList[currentProject].render();
         $("#taskInput").addClass("hidden");
     })
 
@@ -206,11 +228,28 @@ $(document).ready(() => {
             }
         }
         if(first && second) {
-            project.addEdge(first,second);
+            projectList[currentProject].addEdge(first,second);
         }
-        project.render();
+        projectList[currentProject].render();
         $("#flowInput").addClass("hidden");
     })
 
     $(document).on("click",".burndownBtn",makeBurndown);
+    $(document).on("click",".projectButton",setProjectIndex);
+    $("#addProject").on("click", () => {
+        const newProject = new Project;
+        projectList.push(newProject);
+        currentIndex = projectList.length-1;
+        for(const child of $(".projectButton")) {
+            child.value = "unselected";
+        }
+        projectList[currentIndex].render();
+    });
+    $("#submitRename").on("click", () => {
+        if(projectList.length>0){
+            projectList[currentProject].name = $("#rename").val();
+            $(".projectButton")[currentProject].textContent = $("#rename").val();
+            $("rename").val("");
+        }      
+    })
 });
