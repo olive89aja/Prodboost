@@ -68,6 +68,33 @@
                   </div>
                 </div>
       </div>
+      <div class='container text-center'>
+          <h1>Quotes to boost your productivity</h1>
+          <p>These quotes are brought to you by "They said so" API.</p>
+          <button class='btn btn-success'>Inspiring Quote</button>
+          <p id='productivity_quote'></p>
+          <p id='author_quote'></p>
+        </div>
+
+
+<script>
+//This code is inspired by the mutiple Ajax calls done in class and homework
+//and by a code pen about a random quote machine. 
+
+function productivityQuote() {
+  $.ajax({
+      url: "http://quotes.rest/quote/random.json?"+"&api_key=UH_ApJm41A3LUK_j_ScgCweF",
+      method:"GET"}).then(function(response){
+          var results = response.data;
+          console.log(response);
+          $("#productivity_quote").text(response.contents.quote);
+          $("#author_quote").text(response.contents.author);
+      })
+}
+$("button").click(function(){
+  productivityQuote();
+});
+</script>
       <div id = "container" class = "hidden">
         <form id="Idealtask-input" >
           <div class="form-group">
