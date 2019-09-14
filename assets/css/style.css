@@ -11,3 +11,22 @@
 .projectButton[value="selected"] {
     background-color: orange;
 }
+.card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+}
+
+input[type=number] {
+    width:20%;
+}
+
+
+.projectButton:hover {
+    color:purple;
+}
+
+.projectButton:active {
+    color:blue;
+}
+
