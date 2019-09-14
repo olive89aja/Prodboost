@@ -145,7 +145,6 @@ function Task (name, description, timeExpected, deadline) {
     this.description = description;
     this.timeExpected = timeExpected;
     this.deadline = deadline;
-    this.timesLogged = [];
     this.completed = false;
     this.logTime = function(time) {
         this.timesLogged.push(time);
@@ -201,7 +200,7 @@ $(document).ready(() => {
     $("#arrow").on("click", () => {
         $("#firstTaskHolder").empty();
         $("#secondTaskHolder").empty();
-        for(const [key, value] of project.AdjList) {
+        for(const [key, value] of projectList[currentProject].AdjList) {
             const option = $("<option>");
             option.val(key.name);
             option.text(key.name);
@@ -219,7 +218,7 @@ $(document).ready(() => {
         event.preventDefault();
         let first;
         let second;
-        for(const [key,value] of project.AdjList) {
+        for(const [key,value] of projectList[currentProject].AdjList) {
             if($("#firstTaskHolder").children().filter(":selected").val() === key.name) {
                 first = key;
             }
