@@ -2,6 +2,9 @@ body {
     padding:100px;
 }
 
+.hidden {
+    display: none;
+}
 
 .card-img-top {
     width: 100%;
