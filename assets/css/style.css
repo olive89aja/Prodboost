@@ -1,3 +1,7 @@
+body {
+    padding:100px;
+}
+
 .hidden {
     display: none;
 }
@@ -10,8 +14,17 @@
 
 input[type=number] {
     width:20%;
+    background-color:yellow;
 }
 
+input[type=text] {
+    width:20%;
+    background-color:yellow;
+}
+
+#description {
+    background-color:purple;
+}
 
 .projectButton:hover {
     color:purple;
@@ -24,3 +37,4 @@ input[type=number] {
 .projectButton[value="selected"] {   
     background-color: orange;
 }
+
