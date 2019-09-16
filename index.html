@@ -12,7 +12,13 @@
       crossorigin="anonymous"/>
       <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-app.js"></script>
+
+    <!-- <Specific Firebase products we want-->
+    <script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-database.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
+
     <script src='https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.7.3/fabric.js'></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
   </head>
@@ -49,7 +55,7 @@
                 <img class="card-img-top" src="https://i.ibb.co/3zQw2rv/prodboost4.jpg" alt="Card image cap">
                 <div class="card-body">
                   <h5 class="card-title">Calendar</h5>
-                  <p class="card-text"><a href="https://calendar.google.com/calendar/r" target="_blank">Make the most of your time</a></p>
+                  <p id = "calendar-section" class="card-text"><a href="https://calendar.google.com/calendar/r" target="_blank">Make the most of your time</a></p>
                 </div>
               </div>
               <div class="card" style="width: 18rem;">
