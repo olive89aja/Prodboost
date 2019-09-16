@@ -67,7 +67,13 @@ function Project () {
 
     this.findActiveTasks = function() {
         const visited = [];
+        const uncompleted = new Map;
         for(const [key,values] of this.AdjList) {
+            if(!key.completed) {
+                uncompleted.set(key,values);
+            }
+        }
+        for(const [key,values] of uncompleted) {
             for(const value of values) {
                 if(!visited.includes(value)) {
                     visited.push(value);
@@ -75,7 +81,7 @@ function Project () {
             }
         }
         const unvisited = [];
-        for(const [key,values] of this.AdjList) {
+        for(const [key,values] of uncompleted) {
             if(!visited.includes(key)) {
                 unvisited.push(key);
             }
@@ -144,16 +150,18 @@ function Task (name, description, timeExpected, deadline) {
     this.name = name;
     this.description = description;
     this.timeExpected = timeExpected;
+    this.actualTimes = [];
     this.deadline = deadline;
     this.completed = false;
     this.logTime = function(time) {
         this.timesLogged.push(time);
     }
-    this.markCompete = function() {
+    this.markComplete = function() {
+        console.log("done");
         this.completed = true;
     }
     this.generateBurndown = function() {
-        
+        //TODO: generate burndown for this task
     }
 }
 
@@ -237,6 +245,7 @@ $(document).ready(() => {
     $(document).on("click",".projectButton",setProjectIndex);
     $("#addProject").on("click", () => {
         const newProject = new Project;
+        newProject.name=$("#rename").val();
         projectList.push(newProject);
         currentProject = projectList.length-1;
         for(const child of $(".projectButton")) {
@@ -250,5 +259,25 @@ $(document).ready(() => {
             $(".projectButton")[currentProject].textContent = $("#rename").val();
             $("rename").val("");
         }      
+    });
+    $("#markComplete").on("click", () => {
+        $("#completeList").empty();
+        $("#submitComplete").removeClass("hidden");
+        for(const task of projectList[currentProject].AdjList.keys()) {
+            const option = $("<option>");
+            option.text(task.name);
+            option.val(task.name);
+            $("#completeList").append(option);
+        }
+    });
+    $("#completeSubmit").on("click",(event) => {
+        event.preventDefault();
+        for(const [key,value] of projectList[currentProject].AdjList) {
+            if($("#completeList").children().filter(":selected").val() === key.name) {
+                key.markComplete();
+            }
+        }
+        projectList[currentProject].render();
+        $("#submitComplete").addClass("hidden");
     })
 });
