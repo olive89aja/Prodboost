@@ -24,6 +24,12 @@ input[type=text] {
     background-color:purple;
 }
 
+button {
+    background-color:blue;
+    color:white;
+}
+
+
 .projectButton:hover {
     color:purple;
 }
