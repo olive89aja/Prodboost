@@ -10,12 +10,12 @@ body {
 }
 
 input[type=number] {
-    width:20%;
+    width:40%;
     background-color:yellow;
 }
 
 input[type=text] {
-    width:20%;
+    width:40%;
     background-color:yellow;
 }
 
@@ -33,5 +33,12 @@ input[type=text] {
 
 .projectButton[value="selected"] {   
     background-color: orange;
+}
+
+#productivity_quote:before, #productivity_quote:after {
+    content: '"';
+}
+#productivity_quote {
+    color:green;
 }
 
