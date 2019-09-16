@@ -252,10 +252,11 @@
           <h1>Quotes to boost your productivity</h1>
           <p>These quotes are brought to you by "They said so" API.</p>
           <button class='btn btn-success'>Inspiring Quote</button>
-          <p id='productivity_quote'></p>
-          <p id='author_quote'></p>
+          <blockquote><p id='productivity_quote'></p></blockquote>
+          <i id='author_quote'></i>
         </div>
-
+        <br>
+        <br>
 
 <script>
 //This code is inspired by the mutiple Ajax calls done in class and homework
@@ -275,9 +276,10 @@ $("button").click(function(){
   productivityQuote();
 });
 </script>
-      <div id = "container" class = "hidden">
-        <form id="Idealtask-input" >
-          <div class="form-group">
+ 
+        <form id="Idealtask-input">
+            <div class="form-row align-items-center">
+          <div class="form-group col">
             <label for="total-duration">Total Duration of Task (days)</label>
             <input
               type="number"
@@ -286,83 +288,92 @@ $("button").click(function(){
               placeholder="total days"
             />
           </div>
-         <!-- <div class="container">
-              <div class="row">
-                <div class="col-sm">
-                  One of three columns
-                </div>
-                <div class="col-sm">
-                  One of three columns
-                </div>
-                <div class="col-sm">
-                  One of three columns
+                    <div class="form-group col">
+                        <label for="ideal-hours">Ideal hours per day</label>
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="ideal-hours"
+                          placeholder="hours per day"
+                        />
+                      </div>
+                      <div class="form-group col">
+                      <button id="model-data" type="submit" class="btn btn-primary">
+                        Model Data
+                      </button>
+                      </div>
+                    </div>  
+                    
+                    <form id="Actualtask-input">
+                        <div class="form-row align-items-center">
+                            
+                            <div class="form-group col">
+                          <label for="day1-input">day 1 hours:</label>
+                          <input
+                            type="number"
+                            class="form-control"
+                            id="day1-input"
+                            placeholder="# of hrs today"
+                          />
+                        </div>
+                        <div class="form-group col">
+                        <label for="day2-input">day 2 hours:</label>
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="day2-input"
+                          placeholder="# of hrs today"
+                        />
+                      </div>
+                      <div class="form-group col">
+                        <label for="day3-input">day 3 hours:</label>
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="day3-input"
+                          placeholder="# of hrs today"
+                        />
+                      </div>
+                      </div>
+                    
+
+                      <div class="form-row align-items-center">
+                          <div class="form-group col">
+                        <label for="day4-input">day 4 hours:</label>
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="day4-input"
+                          placeholder="# of hrs today"
+                        />
+                          </div>
+                    <div class="form-group col">
+                        <label for="day5-input">day 5 hours:</label>
+                        <input
+                          type="number"
+                          class="form-control"
+                          id="day5-input"
+                          placeholder="# of hrs today"
+                        />
+                      </div>
+                      <div class="form-group col">
+                      <button id="progress-data" type="submit" class="btn btn-primary">
+                        See Progress
+                      </button>
+                    </div>
+                      </div>
+                    </form>
+                  </form>
                 </div>
               </div>
             </div>
-          -->
-          <div class="form-group">
-            <label for="ideal-hours">Ideal hours per day</label>
-            <input
-              type="number"
-              class="form-control"
-              id="ideal-hours"
-              placeholder="hours per day"
-            />
           </div>
-          <button id="model-data" type="submit" class="btn btn-primary">
-            Model Data
-          </button>
-          <form id="Actualtask-input">
-            <div class="form-group">
-              <label for="day1-input">day 1 hours:</label>
-              <input
-                type="number"
-                class="form-control"
-                id="day1-input"
-                placeholder="# of hrs today"
-              />
+        </div>
+      </div>
+          
+           
             </div>
-            <div class="form-group">
-              <label for="day2-input">day 2 hours:</label>
-              <input
-                type="number"
-                class="form-control"
-                id="day2-input"
-                placeholder="# of hrs today"
-              />
-            </div>
-            <div class="form-group">
-              <label for="day3-input">day 3 hours:</label>
-              <input
-                type="number"
-                class="form-control"
-                id="day3-input"
-                placeholder="# of hrs today"
-              />
-            </div>
-            <div class="form-group">
-              <label for="day4-input">day 4 hours:</label>
-              <input
-                type="number"
-                class="form-control"
-                id="day4-input"
-                placeholder="# of hrs today"
-              />
-            </div>
-            <div class="form-group">
-              <label for="day5-input">day 5 hours:</label>
-              <input
-                type="number"
-                class="form-control"
-                id="day5-input"
-                placeholder="# of hrs today"
-              />
-            </div>
-            <button id="progress-data" type="submit" class="btn btn-primary">
-              See Progress
-            </button>
-          </form>
-        </form>
+            
         <div id="function"></div>
         <canvas id="initial-chart" width="200" height="200" ></canvas>
         <canvas id="progress-chart" width="200" height="200" ></canvas>
@@ -373,6 +384,8 @@ $("button").click(function(){
       <button id = "submitRename">Rename this project</button>
     </ul>
     <canvas id="c" width = "800" height = "600"></canvas>
+
+    
     <button id = "box">Add task</button>
     <form id="taskInput" class = "hidden">
       <div class="form-group">
