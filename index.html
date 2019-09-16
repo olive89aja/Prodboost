@@ -9,9 +9,14 @@
       rel="stylesheet"
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+<<<<<<< HEAD
       crossorigin="anonymous"
     />
     <!--<link rel="stylesheet" href="assets/css/style.css" />-->
+=======
+      crossorigin="anonymous"/>
+      <link rel="stylesheet" href="assets/css/style.css">
+>>>>>>> 388ecb161ba390983b1987020191b9624b64f28c
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.7.3/fabric.js"></script>
     <script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-app.js"></script>
@@ -22,6 +27,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
   </head>
   <body>
+<<<<<<< HEAD
     <nav class="navbar navbar-expand-lg">
       <div class="collapse navbar-collapse" id="navbarText">
         <ul class="navbar-nav">
@@ -45,6 +51,35 @@
             >
           </li>
         </ul>
+=======
+      <nav class="navbar navbar-expand-lg">
+          <div class="collapse navbar-collapse" id="navbarText">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="https://olive89aja.github.io/Prodboost/">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="https://olive89aja.github.io/Prodboost/workflow">Design your workflow</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="https://olive89aja.github.io/Prodboost/help.html">Help</a>
+              </li>
+            </ul>   
+          </div>
+        </nav>
+
+
+      <div class="jumbotron">
+          <h1 class="PageName">Boost your productivity</h1>
+          <p class="lead">All the tools you need</p>
+      </div>
+      
+      <div class="col-md-6 offset-3">
+      <p>Active Tasks</p>
+      <ul class="list-group" id="active-tasks">
+          
+      </ul>
+>>>>>>> 388ecb161ba390983b1987020191b9624b64f28c
       </div>
     </nav>
 
@@ -73,6 +108,7 @@
         </div>
       </div>
       <div class="card" style="width: 18rem;">
+<<<<<<< HEAD
         <img
           class="card-img-top"
           src="https://i.ibb.co/3zQw2rv/prodboost4.jpg"
@@ -174,10 +210,11 @@
           See Progress
         </button>
       </form>
-  
+
       <div id="function"></div>
-      <canvas id="initial-chart" width="200" height="200"></canvas>
-      <canvas id="progress-chart" width="200" height="200"></canvas>
+    <canvas id="initial-chart" width="200" height="200"></canvas>
+    <canvas id="progress-chart" width="200" height="200"></canvas>
+  
     <ul id="projectsList">
       <button id="addProject">Add New Project</button>
       <input type="text" id="rename" />
@@ -189,6 +226,159 @@
       <div class="form-group">
         <label for="taskName">Task name</label>
         <input id="taskName" type="text" />
+=======
+              <img class="card-img-top" src="https://i.ibb.co/n0pH2QC/prodboost3.jpg" alt="Card image cap">
+              <div class="card-body">
+                <h5 class="card-title">Burned down chart</h5>
+                <p class="card-text"><a href="#Idealtask-input">Measures of productivity</a></p>
+              </div>
+            </div>
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="https://i.ibb.co/3zQw2rv/prodboost4.jpg" alt="Card image cap">
+                <div class="card-body">
+                  <h5 class="card-title">Calendar</h5>
+                  <p class="card-text"><a href="https://calendar.google.com/calendar/r" target="_blank">Make the most of your time</a></p>
+                </div>
+              </div>
+              <div class="card" style="width: 18rem;">
+                  <img class="card-img-top" src="https://i.ibb.co/vCWhccX/prodboost5.jpg" alt="Card image cap">
+                  <div class="card-body">
+                    <h5 class="card-title">Tools</h5>
+                    <p class="card-text"><a href="https://www.google.com/docs/about" target="_blank">Google Docs</a>, <a href="https://github.com" target="_blank">Github</a>, <a href="https://asana.com/" target="_blank">Asana</a></p>
+                  </div>
+                </div>
+      </div>
+      <div class='container text-center'>
+          <h1>Quotes to boost your productivity</h1>
+          <p>These quotes are brought to you by "They said so" API.</p>
+          <button class='btn btn-success'>Inspiring Quote</button>
+          <p id='productivity_quote'></p>
+          <p id='author_quote'></p>
+        </div>
+
+
+<script>
+//This code is inspired by the mutiple Ajax calls done in class and homework
+//and by a code pen about a random quote machine. 
+
+function productivityQuote() {
+  $.ajax({
+      url: "https://quotes.rest/quote/random.json?"+"&api_key=UH_ApJm41A3LUK_j_ScgCweF",
+      method:"GET"}).then(function(response){
+          var results = response.data;
+          console.log(response);
+          $("#productivity_quote").text(response.contents.quote);
+          $("#author_quote").text(response.contents.author);
+      })
+}
+$("button").click(function(){
+  productivityQuote();
+});
+</script>
+      <div id = "container" class = "hidden">
+        <form id="Idealtask-input" >
+          <div class="form-group">
+            <label for="total-duration">Total Duration of Task (days)</label>
+            <input
+              type="number"
+              class="form-control"
+              id="total-duration"
+              placeholder="total days"
+            />
+          </div>
+         <!-- <div class="container">
+              <div class="row">
+                <div class="col-sm">
+                  One of three columns
+                </div>
+                <div class="col-sm">
+                  One of three columns
+                </div>
+                <div class="col-sm">
+                  One of three columns
+                </div>
+              </div>
+            </div>
+          -->
+          <div class="form-group">
+            <label for="ideal-hours">Ideal hours per day</label>
+            <input
+              type="number"
+              class="form-control"
+              id="ideal-hours"
+              placeholder="hours per day"
+            />
+          </div>
+          <button id="model-data" type="submit" class="btn btn-primary">
+            Model Data
+          </button>
+          <form id="Actualtask-input">
+            <div class="form-group">
+              <label for="day1-input">day 1 hours:</label>
+              <input
+                type="number"
+                class="form-control"
+                id="day1-input"
+                placeholder="# of hrs today"
+              />
+            </div>
+            <div class="form-group">
+              <label for="day2-input">day 2 hours:</label>
+              <input
+                type="number"
+                class="form-control"
+                id="day2-input"
+                placeholder="# of hrs today"
+              />
+            </div>
+            <div class="form-group">
+              <label for="day3-input">day 3 hours:</label>
+              <input
+                type="number"
+                class="form-control"
+                id="day3-input"
+                placeholder="# of hrs today"
+              />
+            </div>
+            <div class="form-group">
+              <label for="day4-input">day 4 hours:</label>
+              <input
+                type="number"
+                class="form-control"
+                id="day4-input"
+                placeholder="# of hrs today"
+              />
+            </div>
+            <div class="form-group">
+              <label for="day5-input">day 5 hours:</label>
+              <input
+                type="number"
+                class="form-control"
+                id="day5-input"
+                placeholder="# of hrs today"
+              />
+            </div>
+            <button id="progress-data" type="submit" class="btn btn-primary">
+              See Progress
+            </button>
+          </form>
+        </form>
+        <div id="function"></div>
+        <canvas id="initial-chart" width="200" height="200" ></canvas>
+        <canvas id="progress-chart" width="200" height="200" ></canvas>
+      </div>
+    <ul id="projectsList">
+      <button id="addProject">Add New Project</button>
+      <input type = "text" id = "rename">
+      <button id = "submitRename">Rename this project</button>
+    </ul>
+    <canvas id="c" width = "800" height = "600"></canvas>
+    <button id = "box">Add task</button>
+    <form id="taskInput" class = "hidden">
+      <div class="form-group">
+        <label for="taskName">Task name</label>
+        <input id="taskName" type="text">
+>>>>>>> 388ecb161ba390983b1987020191b9624b64f28c
       </div>
       <div class="form-group">
         <label for="description">Description</label>
@@ -196,6 +386,7 @@
       </div>
       <div class="form-group">
         <label for="timeExpected">Time expected (hours)</label>
+<<<<<<< HEAD
         <input type="number" id="timeExpected" />
       </div>
       <div class="form-group">
@@ -206,6 +397,18 @@
     </form>
     <button id="arrow">Add flow between tasks</button>
     <form id="flowInput" class="hidden">
+=======
+        <input type="number" id="timeExpected">
+      </div>
+      <div class="form-group">
+        <label for="deadline">Deadline</label>
+        <input type="date" id="deadline">
+      </div>
+      <input type="submit" id="taskSubmit">
+    </form>
+    <button id = "arrow">Add flow between tasks</button>
+    <form id="flowInput" class = "hidden">
+>>>>>>> 388ecb161ba390983b1987020191b9624b64f28c
       <div class="form-group">
         <label for="firstTask">First task</label>
         <select id="firstTaskHolder"></select>
@@ -214,6 +417,7 @@
         <label for="secondTask">Second task</label>
         <select id="secondTaskHolder"></select>
       </div>
+<<<<<<< HEAD
       <input type="submit" id="flowSubmit" />
     </form>
     <script src="assets/script.js"></script>
@@ -222,6 +426,25 @@
       <div class="container ">
         Copyright &copy K.Jiang, S.Rolz, O.Auberger, S.Vukasin;
       </div>
+=======
+      <input type="submit" id="flowSubmit">
+    </form>
+    <button id="markComplete">Mark a task complete</button>
+    <form id="submitComplete" class = "hidden">
+      <div class="form-group">
+        
+        <label for="complete">Choose a task</label>
+        <select name="completeList" id="completeList"></select>
+      </div>
+      <input type="submit" id="completeSubmit">
+    </form>
+    <script src="assets/javascript/script.js"></script>
+    <script src = "assets/javascript/burndown_test.js"></script>
+    <footer>
+        <div class="container ">
+            Copyright &copy K.Jiang, S.Rolz, O.Auberger, S.Vukasin;
+        </div>
+>>>>>>> 388ecb161ba390983b1987020191b9624b64f28c
     </footer>
   </body>
 </html>
