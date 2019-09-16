@@ -22,9 +22,7 @@
               <li class="nav-item">
                 <a class="nav-link" href="https://olive89aja.github.io/Prodboost/">Home</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="https://olive89aja.github.io/Prodboost/workflow">Design your workflow</a>
-              </li>
+             
               <li class="nav-item">
                 <a class="nav-link" href="https://olive89aja.github.io/Prodboost/help.html">Help</a>
               </li>
@@ -207,24 +205,31 @@ $("button").click(function(){
     
     <button id = "box">Add task</button>
     <form id="taskInput" class = "hidden">
-      <div class="form-group">
+        <div class="form-row align-items-center">
+            <div class="form-group col">
         <label for="taskName">Task name</label>
         <input id="taskName" type="text">
       </div>
-      <div class="form-group">
+
+      <div class="form-group col">
+      
         <label for="description">Description</label>
         <textarea id="description"></textarea>
       </div>
-      <div class="form-group">
+      
+          <div class="form-group col">
         <label for="timeExpected">Time expected (hours)</label>
         <input type="number" id="timeExpected">
       </div>
-      <div class="form-group">
+
+      <div class="form-group col">
         <label for="deadline">Deadline</label>
         <input type="date" id="deadline">
       </div>
+      </div>
       <input type="submit" id="taskSubmit">
     </form>
+
     <button id = "arrow">Add flow between tasks</button>
     <form id="flowInput" class = "hidden">
       <div class="form-group">
@@ -245,6 +250,7 @@ $("button").click(function(){
         <select name="completeList" id="completeList"></select>
       </div>
       <input type="submit" id="completeSubmit">
+    </form>
     </form>
     <script src="assets/javascript/script.js"></script>
     <script src = "assets/javascript/burndown_test.js"></script>
