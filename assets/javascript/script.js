@@ -1,6 +1,21 @@
 var canvas = new fabric.Canvas("c");
 canvas.setBackgroundColor("white", canvas.renderAll.bind(canvas));
+let eventsArray = [];
+//let timeMin = "2019-01-01T10:00:00-07:00";
+let eventObject = {};
+//declare firebase object
+let firebaseConfig = {
+  apiKey: "AIzaSyCDY46Uu2NAop4mIfjz9qM8S7PEztGvkxA",
+  authDomain: "prodboost-558af.firebaseapp.com",
+  databaseURL: "https://prodboost-558af.firebaseio.com",
+  projectId: "prodboost-558af",
+  storageBucket: "",
+  messagingSenderId: "393017213746",
+  appId: "1:393017213746:web:c379d873839bc14d078d2b"
+};
 
+firebase.initializeApp(firebaseConfig);
+const database = firebase.database();
 let totalDuration; //time units = days
 let idealHours; //per day
 let totalHours;
