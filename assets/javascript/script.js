@@ -22,23 +22,24 @@ let burndownForecast;
 
 $("#Actualtask-input").hide();
 function dayInput() {
-  if (currentDay != 0) {
     $("#Actualtask-input").show();
     for (let day = 1; day <= currentDay; day++) {
-      $("#daily-input")
-        .append(`<div data-day="${day}" id="daily-input${day}" class="form-group">
-            <label for="day-input${day}">day ${day} hours:</label>
-            <input
+        const dayInput = $(`<div data-day="${day}" id="daily-input${day}" class="form-group">`);
+        const label = $(` <label for="day-input${day}">`);
+        label.text(`day ${day} hours:`);
+        dayInput.append(label);
+        const input = $(`<input
               
-              type="number"
-              class="actual-hoursClass form-control"
-              id="day-input${day}"
-              placeholder="# of hrs today"
-            />
-          </div>`);
+        type="number"
+        class="actual-hoursClass form-control"
+        id="day-input${day}"
+        placeholder="# of hrs today"
+      >`)
+        dayInput.append(input);
+        $("#daily-input").append(dayInput);
       dayArray.push(day);
     }
-  }
+  
 
   console.log(dayArray);
   $("#progress-data").on("click", function(event) {
@@ -52,11 +53,7 @@ function dayInput() {
       );
       hoursWorked.push(actualHours);
     }
-    console.log(hoursWorked);
     actualUpdate();
-    console.log(idealHoursArray);
-    console.log(forecastArray);
-    console.log(actualHoursArray);
     // actualHoursArray = [totalHours];
     // actualProgress = [0];
     // actualProgress.push(actualHours);
@@ -100,12 +97,9 @@ function actualUpdate() {
   forecastArray = [totalHours];
   for (let y = 1; y < hoursWorked.length; y++) {
     burndown = actualHoursArray[y - 1] - hoursWorked[y];
-    console.log(burndown);
     actualHoursArray.push(burndown);
     forecastArray.push(burndown);
   }
-  console.log(actualHoursArray);
-  console.log(burndown);
   adjustedRate = burndown / daysLeft;
 
   for (let z = actualHoursArray.length; z <= totalDuration; z++) {
@@ -272,6 +266,7 @@ function Project() {
 
 function Task(name, description, timeExpected, deadline) {
   this.name = name;
+  this.daySubmitted = moment().format();
   this.description = description;
   this.timeExpected = timeExpected;
   this.actualTimes = [];
@@ -281,65 +276,37 @@ function Task(name, description, timeExpected, deadline) {
     this.timesLogged.push(time);
   };
   this.markComplete = function() {
-    console.log("done");
     this.completed = true;
   };
   this.generateBurndown = function() {
-    //TODO: generate burndown for this task
-  };
-}
+    totalDuration = parseInt(moment.duration(moment(this.deadline).diff(moment())).as("days"))+1;
+    idealHours = this.timeExpected / totalDuration;
+    totalHours = this.timeExpected;
+    goalDate = moment(this.daySubmitted).clone().add(totalDuration, "days");
+    today = moment();
+    currentDay = today.clone().diff(daySubmitted, "days")+1;
+    daysLeft = goalDate.clone().diff(today + 1, "days");
+    for (let day = 0; day < totalDuration + 1; day++) {
+        let diff = totalHours - day * idealHours;
 
-function makeBurndown() {
-  for (const task of projectList[currentProject].AdjList.keys()) {
-    if (task.name === $(this).attr("data")) {
-      task.generateBurndown();
-      $("#model-data").on("click", function(event) {
-        event.preventDefault();
-        totalDuration = $("#total-duration")
-          .val()
-          .trim();
-        totalDuration = parseInt(totalDuration);
-        console.log(typeof totalDuration);
-        idealHours = $("#ideal-hours")
-          .val()
-          .trim();
-        daySubmitted = $("#day-submitted")
-          .val()
-          .trim();
-        daySubmitted = moment(daySubmitted, "MM-DD-YYYY");
-        console.log(daySubmitted);
-        totalHours = totalDuration * idealHours;
-        goalDate = daySubmitted.clone().add(totalDuration, "days");
-        console.log(goalDate);
-        today = moment();
-        console.log(today);
-        currentDay = today.clone().diff(daySubmitted, "days");
-        console.log(currentDay);
-        daysLeft = goalDate.clone().diff(today + 1, "days");
-        daysLeft = daysLeft + 1;
-        console.log(daysLeft);
-        for (let day = 0; day < totalDuration + 1; day++) {
-          let diff = totalHours - day * idealHours;
+        idealHoursArray.push(diff);
+    }
 
-          idealHoursArray.push(diff);
-        }
-        console.log(idealHoursArray);
-
-        let ctxInitial = $("#initial-chart");
-        var stackedLine = new Chart(ctxInitial, {
-          type: "line",
-          data: {
+    let ctxInitial = $("#initial-chart");
+    var stackedLine = new Chart(ctxInitial, {
+        type: "line",
+        data: {
             datasets: [
-              {
+            {
                 label: "Ideal",
                 data: idealHoursArray
-              }
+            }
             ],
             labels: [0, 1, 2, 3, 4, 5]
-          },
-          options: {
+            },
+        options: {
             scales: {
-              yAxes: [
+                yAxes: [
                 {
                   stacked: true
                 }
@@ -349,7 +316,15 @@ function makeBurndown() {
         });
         $("#function").text(`y = ${totalHours} - ${idealHours}x`);
         dayInput();
-      });
+  };
+}
+
+function makeBurndown() {
+  for (const task of projectList[currentProject].AdjList.keys()) {
+    if (task.name === $(this).attr("data")) {
+      task.generateBurndown();
+        
+      
     }
   }
 }

@@ -12,6 +12,7 @@
       crossorigin="anonymous"/>
       <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.7.3/fabric.js'></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
   </head>
@@ -94,38 +95,6 @@ $("button").click(function(){
 });
 </script>
  
- <form id="Idealtask-input">
-  <div class="form-group">
-    <label for="total-duration">Total Duration of Task (days)</label>
-    <input
-      type="number"
-      class="form-control"
-      id="total-duration"
-      placeholder="total days"
-    />
-  </div>
-  <div class="form-group">
-    <label for="ideal-hours">Ideal hours per day</label>
-    <input
-      type="number"
-      class="form-control"
-      id="ideal-hours"
-      placeholder="hours per day"
-    />
-  </div>
-  <div class="form-group">
-    <label for="day-submitted">Date Submitted (MM-DD-YYYY)</label>
-    <input
-      type="text"
-      class="form-control"
-      id="day-submitted"
-      placeholder="day submitted"
-    />
-  </div>
-  <button id="model-data" type="submit" class="btn btn-primary">
-    Model Data
-  </button>
-</form>
 <form id="Actualtask-input">
   <div id="daily-input" class="form-group"></div>
 
@@ -205,7 +174,6 @@ $("button").click(function(){
     </form>
     </form>
     <script src="assets/javascript/script.js"></script>
-    <script src = "assets/javascript/burndown_test.js"></script>
     <footer>
         <div class="container ">
             Copyright &copy K.Jiang, S.Rolz, O.Auberger, S.Vukasin;
