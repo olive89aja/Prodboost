@@ -12,10 +12,13 @@
       crossorigin="anonymous"/>
       <link rel="stylesheet" href="assets/css/style.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
     <script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-app.js"></script>
 
     <!-- <Specific Firebase products we want-->
     <script src="https://www.gstatic.com/firebasejs/6.5.0/firebase-database.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.js"></script>
+
     <script src='https://cdnjs.cloudflare.com/ajax/libs/fabric.js/1.7.3/fabric.js'></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
   </head>
@@ -26,9 +29,7 @@
               <li class="nav-item">
                 <a class="nav-link" href="https://olive89aja.github.io/Prodboost/">Home</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="https://olive89aja.github.io/Prodboost/workflow">Design your workflow</a>
-              </li>
+             
               <li class="nav-item">
                 <a class="nav-link" href="https://olive89aja.github.io/Prodboost/help.html">Help</a>
               </li>
@@ -50,13 +51,6 @@
       </div>
     
       <div class="d-flex justify-content-center" >
-      <div class="card" style="width: 18rem;">
-              <img class="card-img-top" src="https://i.ibb.co/n0pH2QC/prodboost3.jpg" alt="Card image cap">
-              <div class="card-body">
-                <h5 class="card-title">Burned down chart</h5>
-                <p class="card-text"><a href="#Idealtask-input">Measures of productivity</a></p>
-              </div>
-            </div>
             <div class="card" style="width: 18rem;">
                 <img class="card-img-top" src="https://i.ibb.co/3zQw2rv/prodboost4.jpg" alt="Card image cap">
                 <div class="card-body">
@@ -70,7 +64,7 @@
                     <h5 class="card-title">Tools</h5>
                     <p class="card-text"><a href="https://www.google.com/docs/about" target="_blank">Google Docs</a>, <a href="https://github.com" target="_blank">Github</a>, <a href="https://asana.com/" target="_blank">Asana</a></p>
                   </div>
-                </div>
+                </div> 
       </div>
       <div class='container text-center'>
           <h1>Quotes to boost your productivity</h1>
@@ -100,44 +94,13 @@ $("button").click(function(){
 });
 </script>
  
- <form id="Idealtask-input">
-  <div class="form-group">
-    <label for="total-duration">Total Duration of Task (days)</label>
-    <input
-      type="number"
-      class="form-control"
-      id="total-duration"
-      placeholder="total days"
-    />
-  </div>
-  <div class="form-group">
-    <label for="ideal-hours">Ideal hours per day</label>
-    <input
-      type="number"
-      class="form-control"
-      id="ideal-hours"
-      placeholder="hours per day"
-    />
-  </div>
-  <div class="form-group">
-    <label for="day-submitted">Date Submitted (MM-DD-YYYY)</label>
-    <input
-      type="text"
-      class="form-control"
-      id="day-submitted"
-      placeholder="day submitted"
-    />
-  </div>
-  <button id="model-data" type="submit" class="btn btn-primary">
-    Model Data
-  </button>
-</form>
 <form id="Actualtask-input">
   <div id="daily-input" class="form-group"></div>
 
   <button id="progress-data" type="submit" class="btn btn-primary">
     See Progress
   </button>
+
 </form>
                 </div>
               </div>
@@ -163,24 +126,31 @@ $("button").click(function(){
     
     <button id = "box">Add task</button>
     <form id="taskInput" class = "hidden">
-      <div class="form-group">
+        <div class="form-row align-items-center">
+            <div class="form-group col">
         <label for="taskName">Task name</label>
         <input id="taskName" type="text">
       </div>
-      <div class="form-group">
+
+      <div class="form-group col">
+      
         <label for="description">Description</label>
         <textarea id="description"></textarea>
       </div>
-      <div class="form-group">
+      
+          <div class="form-group col">
         <label for="timeExpected">Time expected (hours)</label>
         <input type="number" id="timeExpected">
       </div>
-      <div class="form-group">
+
+      <div class="form-group col">
         <label for="deadline">Deadline</label>
         <input type="date" id="deadline">
       </div>
+      </div>
       <input type="submit" id="taskSubmit">
     </form>
+
     <button id = "arrow">Add flow between tasks</button>
     <form id="flowInput" class = "hidden">
       <div class="form-group">
@@ -202,8 +172,12 @@ $("button").click(function(){
       </div>
       <input type="submit" id="completeSubmit">
     </form>
+    </form>
     <script src="assets/javascript/script.js"></script>
+
     <script src = "assets/javascript/burndown_test.js"></script>
+    <script src = "assets/javascript/calendar.js"></script>
+
     <footer>
         <div class="container ">
             Copyright &copy K.Jiang, S.Rolz, O.Auberger, S.Vukasin;
