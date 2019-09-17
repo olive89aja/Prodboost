@@ -308,10 +308,8 @@ function Task(name, description, timeExpected, deadline) {
     this.completed = true;
   };
   this.generateBurndown = function() {
-    totalDuration =
-      parseInt(
-        moment.duration(moment(this.deadline).diff(moment())).as("days")
-      ) + 1;
+    totalDuration = Math.ceil(moment.duration(moment(this.deadline).diff(moment())).as("days"))+1;
+
     idealHours = this.timeExpected / totalDuration;
     totalHours = this.timeExpected;
     goalDate = moment(this.daySubmitted)
