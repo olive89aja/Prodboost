@@ -21,21 +21,20 @@ input[type=text] {
 }
 
 #description {
-    background-color:purple;
+    background-color:yellow;
 }
 
 button {
-    background-color:blue;
-    color:white;
+    background-color:#66ffcc;
+    color:black;
 }
-
 
 .projectButton:hover {
     color:purple;
 }
 
 .projectButton:active {
-    color:blue;
+    color:#66ffcc;
 }
 
 .projectButton[value="selected"] {   
