@@ -78,10 +78,9 @@ function dayInput() {
     // adjustedRate = burndown / daysLeft;
     // //forecastBurndown = burndown - adjustedRate;
     // actualHoursArray = [totalHours, burndown];
+    const displayAdjustedRate = adjustedRate.toFixed(2);
     $("#function").text(
-      console.log(
-        `y = ${totalHours} - ${adjustedRate.toFixed(2)}x (adjusted rate)`
-      )
+      console.log(`y = ${totalHours} - ${displayAdjustedRate}x (adjusted rate)`)
     );
     console.log();
     let ctxActual = $("#progress-chart");
@@ -91,12 +90,14 @@ function dayInput() {
         datasets: [
           {
             label: "Ideal",
-            data: idealHoursArray
+            data: idealHoursArray,
+            borderColor: "rgba(165, 55, 253, 1)"
           },
           {
             label: "Forecast",
             data: forecastArray,
-            borderDash: [5, 15]
+            borderDash: [5, 15],
+            borderColor: "rgb(46, 204, 113)"
           },
           {
             label: "Actual",
