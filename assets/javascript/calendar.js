@@ -1,6 +1,6 @@
 $(document).ready(function() {
   let eventsArray = [];
-  //let timeMin = "2019-01-01T10:00:00-07:00";
+  let timeMin = "2019-07-01T10:00:00-07:00";
   let eventObject = {};
   let firebaseConfig = {
     apiKey: "AIzaSyCDY46Uu2NAop4mIfjz9qM8S7PEztGvkxA",
@@ -54,7 +54,7 @@ $(document).ready(function() {
         .then(function(response) {
           console.log(response);
           $.ajax({
-            url: `https://cors-anywhere.herokuapp.com/https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events?key=${apiKey}`,
+            url: `https://cors-anywhere.herokuapp.com/https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events?key=${apiKey}&timeMin=${timeMin}`,
             dataType: "json",
             type: "GET",
             headers: {
@@ -62,6 +62,7 @@ $(document).ready(function() {
             }
           }).then(function(response) {
             eventsArray = response.items;
+            $("#calendar-section").html("");
             for (let event = 0; event < eventsArray.length; event++) {
               eventObject = {
                 subject: eventsArray[event].summary,
@@ -71,7 +72,7 @@ $(document).ready(function() {
               };
               console.log(eventObject.link);
               $("#calendar-section").append(
-                `<a href = ${eventObject.link}>${eventObject.subject}</a></br>`
+                `<a href = ${eventObject.link} target="_blank">${eventObject.subject}</a></br>`
               );
             }
           });
