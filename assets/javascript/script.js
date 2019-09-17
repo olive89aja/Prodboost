@@ -1,6 +1,21 @@
 var canvas = new fabric.Canvas("c");
 canvas.setBackgroundColor("white", canvas.renderAll.bind(canvas));
+let eventsArray = [];
+//let timeMin = "2019-01-01T10:00:00-07:00";
+let eventObject = {};
+//declare firebase object
+// let firebaseConfig = {
+//   apiKey: "AIzaSyCDY46Uu2NAop4mIfjz9qM8S7PEztGvkxA",
+//   authDomain: "prodboost-558af.firebaseapp.com",
+//   databaseURL: "https://prodboost-558af.firebaseio.com",
+//   projectId: "prodboost-558af",
+//   storageBucket: "",
+//   messagingSenderId: "393017213746",
+//   appId: "1:393017213746:web:c379d873839bc14d078d2b"
+// };
 
+// firebase.initializeApp(firebaseConfig);
+// const database = firebase.database();
 let totalDuration; //time units = days
 let idealHours; //per day
 let totalHours;
@@ -19,27 +34,29 @@ let today;
 let daysLeft;
 let hoursWorked = [0];
 let burndownForecast;
+const labelsArray = [];
 
 $("#Actualtask-input").hide();
 function dayInput() {
-    $("#Actualtask-input").show();
-    for (let day = 1; day <= currentDay; day++) {
-        const dayInput = $(`<div data-day="${day}" id="daily-input${day}" class="form-group">`);
-        const label = $(` <label for="day-input${day}">`);
-        label.text(`day ${day} hours:`);
-        dayInput.append(label);
-        const input = $(`<input
+  $("#Actualtask-input").show();
+  for (let day = 1; day <= currentDay; day++) {
+    const dayInput = $(
+      `<div data-day="${day}" id="daily-input${day}" class="form-group">`
+    );
+    const label = $(` <label for="day-input${day}">`);
+    label.text(`day ${day} hours:`);
+    dayInput.append(label);
+    const input = $(`<input
               
         type="number"
         class="actual-hoursClass form-control"
         id="day-input${day}"
         placeholder="# of hrs today"
-      >`)
-        dayInput.append(input);
-        $("#daily-input").append(dayInput);
-      dayArray.push(day);
-    }
-  
+      >`);
+    dayInput.append(input);
+    $("#daily-input").append(dayInput);
+    dayArray.push(day);
+  }
 
   console.log(dayArray);
   $("#progress-data").on("click", function(event) {
@@ -61,7 +78,12 @@ function dayInput() {
     // adjustedRate = burndown / daysLeft;
     // //forecastBurndown = burndown - adjustedRate;
     // actualHoursArray = [totalHours, burndown];
-    $("#function").text(`y = ${totalHours} - ${adjustedRate}x (adjusted rate)`);
+    $("#function").text(
+      console.log(
+        `y = ${totalHours} - ${adjustedRate.toFixed(2)}x (adjusted rate)`
+      )
+    );
+    console.log();
     let ctxActual = $("#progress-chart");
     var stackedLine = new Chart(ctxActual, {
       type: "line",
@@ -81,11 +103,18 @@ function dayInput() {
             data: actualHoursArray
           }
         ],
-        labels: [0, 1, 2, 3, 4, 5]
+        labels: labelsArray
       },
       options: {
         scales: {
-          yAxes: []
+          yAxes: [
+            {
+              display: true,
+              ticks: {
+                beginAtZero: true
+              }
+            }
+          ]
         }
       }
     });
@@ -280,42 +309,45 @@ function Task(name, description, timeExpected, deadline) {
   };
   this.generateBurndown = function() {
     totalDuration = Math.ceil(moment.duration(moment(this.deadline).diff(moment())).as("days"))+1;
+
     idealHours = this.timeExpected / totalDuration;
     totalHours = this.timeExpected;
-    goalDate = moment(this.daySubmitted).clone().add(totalDuration, "days");
+    goalDate = moment(this.daySubmitted)
+      .clone()
+      .add(totalDuration, "days");
     today = moment();
-    currentDay = today.clone().diff(daySubmitted, "days")+1;
+    currentDay = today.clone().diff(daySubmitted, "days") + 1;
     daysLeft = goalDate.clone().diff(today + 1, "days");
     for (let day = 0; day < totalDuration + 1; day++) {
-        let diff = totalHours - day * idealHours;
-
-        idealHoursArray.push(diff);
+      let diff = totalHours - day * idealHours;
+      labelsArray.push(day + 1);
+      idealHoursArray.push(diff);
     }
 
     let ctxInitial = $("#initial-chart");
     var stackedLine = new Chart(ctxInitial, {
-        type: "line",
-        data: {
-            datasets: [
-            {
-                label: "Ideal",
-                data: idealHoursArray
-            }
-            ],
-            labels: [0, 1, 2, 3, 4, 5]
-            },
-        options: {
-            scales: {
-                yAxes: [
-                {
-                  stacked: true
-                }
-              ]
-            }
+      type: "line",
+      data: {
+        datasets: [
+          {
+            label: "Ideal",
+            data: idealHoursArray
           }
-        });
-        $("#function").text(`y = ${totalHours} - ${idealHours}x`);
-        dayInput();
+        ],
+        labels: labelsArray
+      },
+      options: {
+        scales: {
+          yAxes: [
+            {
+              stacked: true
+            }
+          ]
+        }
+      }
+    });
+    $("#function").text(`y = ${totalHours} - ${idealHours.toFixed(2)}x`);
+    dayInput();
   };
 }
 
@@ -323,8 +355,6 @@ function makeBurndown() {
   for (const task of projectList[currentProject].AdjList.keys()) {
     if (task.name === $(this).attr("data")) {
       task.generateBurndown();
-        
-      
     }
   }
 }
