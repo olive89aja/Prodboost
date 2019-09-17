@@ -34,6 +34,7 @@ let today;
 let daysLeft;
 let hoursWorked = [0];
 let burndownForecast;
+const labelsArray = [];
 
 $("#Actualtask-input").hide();
 function dayInput() {
@@ -77,7 +78,12 @@ function dayInput() {
     // adjustedRate = burndown / daysLeft;
     // //forecastBurndown = burndown - adjustedRate;
     // actualHoursArray = [totalHours, burndown];
-    $("#function").text(`y = ${totalHours} - ${adjustedRate}x (adjusted rate)`);
+    $("#function").text(
+      console.log(
+        `y = ${totalHours} - ${adjustedRate.toFixed(2)}x (adjusted rate)`
+      )
+    );
+    console.log();
     let ctxActual = $("#progress-chart");
     var stackedLine = new Chart(ctxActual, {
       type: "line",
@@ -97,11 +103,18 @@ function dayInput() {
             data: actualHoursArray
           }
         ],
-        labels: [0, 1, 2, 3, 4, 5]
+        labels: labelsArray
       },
       options: {
         scales: {
-          yAxes: []
+          yAxes: [
+            {
+              display: true,
+              ticks: {
+                beginAtZero: true
+              }
+            }
+          ]
         }
       }
     });
@@ -309,7 +322,7 @@ function Task(name, description, timeExpected, deadline) {
     daysLeft = goalDate.clone().diff(today + 1, "days");
     for (let day = 0; day < totalDuration + 1; day++) {
       let diff = totalHours - day * idealHours;
-
+      labelsArray.push(day + 1);
       idealHoursArray.push(diff);
     }
 
@@ -323,7 +336,7 @@ function Task(name, description, timeExpected, deadline) {
             data: idealHoursArray
           }
         ],
-        labels: [0, 1, 2, 3, 4, 5]
+        labels: labelsArray
       },
       options: {
         scales: {
@@ -335,7 +348,7 @@ function Task(name, description, timeExpected, deadline) {
         }
       }
     });
-    $("#function").text(`y = ${totalHours} - ${idealHours}x`);
+    $("#function").text(`y = ${totalHours} - ${idealHours.toFixed(2)}x`);
     dayInput();
   };
 }
