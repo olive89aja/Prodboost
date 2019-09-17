@@ -62,19 +62,26 @@ $(document).ready(function() {
             }
           }).then(function(response) {
             eventsArray = response.items;
-            $("#calendar-section").html("");
+            $("#calendar-table").html("");
             for (let event = 0; event < eventsArray.length; event++) {
               eventObject = {
                 subject: eventsArray[event].summary,
                 location: eventsArray[event].location,
-                date: eventsArray[event].start.dateTime,
+                date: moment(eventsArray[event].start.dateTime).format(
+                  "MM/DD/YYYY HH:mm"
+                ),
                 link: eventsArray[event].htmlLink
               };
               console.log(eventObject.link);
-              $("#calendar-section").append(
-                `<a href = ${eventObject.link} target="_blank">${eventObject.subject}</a></br>`
-              );
+              // $("#calendar-section").append(
+              //   `<a href = ${eventObject.link} target="_blank">${eventObject.subject}</a></br>`
+              // );
+              $("#calendar-table").append(`<tr>
+                <td  ><a href = ${eventObject.link} target="_blank">${eventObject.subject}</a></td>
+                <td  >${eventObject.date}</td>
+              </tr>`);
             }
+            console.log(eventObject.date);
           });
         })
 
@@ -82,7 +89,3 @@ $(document).ready(function() {
     });
   });
 });
-// https://us-central1-prodboost-558af.cloudfunctions.net
-// https://us-central1-prodboost-558af.cloudfunctions.net/token
-
-// {"web":{"client_id":"458461954801-ak1cbs7opinlpvdais69h3h9o8tv3clv.apps.googleusercontent.com","project_id":"awesome-habitat-252822","auth_uri":"https://accounts.google.com/o/oauth2/auth","token_uri":"https://oauth2.googleapis.com/token","auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs","client_secret":"2Cly-X5HHTI4L-JKN1X1u-O0"}}
